@@ -648,7 +648,7 @@
             // 
             dtv_visualizartreino.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtv_visualizartreino.Columns.AddRange(new DataGridViewColumn[] { dias, colunaAparelho, colunaSerie, colunaRep });
-            dtv_visualizartreino.Location = new Point(608, 75);
+            dtv_visualizartreino.Location = new Point(594, 75);
             dtv_visualizartreino.Margin = new Padding(3, 4, 3, 4);
             dtv_visualizartreino.Name = "dtv_visualizartreino";
             dtv_visualizartreino.RowHeadersWidth = 51;
