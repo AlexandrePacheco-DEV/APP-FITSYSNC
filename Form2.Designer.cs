@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(tela_cadastroaluno));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            btn_cadastrar = new Button();
             pictureBox3 = new PictureBox();
             label17 = new Label();
             data_nascimento = new MaskedTextBox();
@@ -69,6 +70,7 @@
             label4 = new Label();
             label16 = new Label();
             tabPage2 = new TabPage();
+            btn_adicionarnalista = new Button();
             enviar_whatsapp = new Button();
             label19 = new Label();
             label18 = new Label();
@@ -87,8 +89,6 @@
             colunaSerie = new DataGridViewTextBoxColumn();
             colunaRep = new DataGridViewTextBoxColumn();
             imageList1 = new ImageList(components);
-            btn_cadastrar = new Button();
-            btn_adicionarnalista = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -158,12 +158,22 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "ALUNO";
             // 
+            // btn_cadastrar
+            // 
+            btn_cadastrar.Location = new Point(1076, 463);
+            btn_cadastrar.Name = "btn_cadastrar";
+            btn_cadastrar.Size = new Size(104, 29);
+            btn_cadastrar.TabIndex = 92;
+            btn_cadastrar.Text = "CADASTRAR";
+            btn_cadastrar.UseVisualStyleBackColor = true;
+            // 
             // pictureBox3
             // 
+            pictureBox3.BackColor = Color.Black;
             pictureBox3.Image = Properties.Resources.LOGO_ESCRITA_FITSYSNC;
-            pictureBox3.Location = new Point(0, 3);
+            pictureBox3.Location = new Point(-69, 0);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(407, 126);
+            pictureBox3.Size = new Size(1330, 126);
             pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox3.TabIndex = 87;
             pictureBox3.TabStop = false;
@@ -509,6 +519,16 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "TREINO";
             // 
+            // btn_adicionarnalista
+            // 
+            btn_adicionarnalista.Location = new Point(59, 425);
+            btn_adicionarnalista.Name = "btn_adicionarnalista";
+            btn_adicionarnalista.Size = new Size(118, 29);
+            btn_adicionarnalista.TabIndex = 93;
+            btn_adicionarnalista.Text = "ADICIONAR";
+            btn_adicionarnalista.UseVisualStyleBackColor = true;
+            btn_adicionarnalista.Click += btn_adicionarnalista_Click;
+            // 
             // enviar_whatsapp
             // 
             enviar_whatsapp.BackColor = Color.FromArgb(0, 192, 0);
@@ -552,8 +572,9 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.BackColor = Color.Transparent;
             pictureBox2.Image = Properties.Resources.TEXTO_REGISTRO_TREINO_FITSYNC;
-            pictureBox2.Location = new Point(656, -50);
+            pictureBox2.Location = new Point(394, -50);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(512, 118);
             pictureBox2.TabIndex = 87;
@@ -627,7 +648,7 @@
             // 
             dtv_visualizartreino.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtv_visualizartreino.Columns.AddRange(new DataGridViewColumn[] { dias, colunaAparelho, colunaSerie, colunaRep });
-            dtv_visualizartreino.Location = new Point(619, 84);
+            dtv_visualizartreino.Location = new Point(608, 75);
             dtv_visualizartreino.Margin = new Padding(3, 4, 3, 4);
             dtv_visualizartreino.Name = "dtv_visualizartreino";
             dtv_visualizartreino.RowHeadersWidth = 51;
@@ -668,25 +689,6 @@
             imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
             imageList1.TransparentColor = Color.Transparent;
             imageList1.Images.SetKeyName(0, "TEXTO REGISTRO TREINO FITSYNC.png");
-            // 
-            // btn_cadastrar
-            // 
-            btn_cadastrar.Location = new Point(1076, 463);
-            btn_cadastrar.Name = "btn_cadastrar";
-            btn_cadastrar.Size = new Size(104, 29);
-            btn_cadastrar.TabIndex = 92;
-            btn_cadastrar.Text = "CADASTRAR";
-            btn_cadastrar.UseVisualStyleBackColor = true;
-            // 
-            // btn_adicionarnalista
-            // 
-            btn_adicionarnalista.Location = new Point(59, 425);
-            btn_adicionarnalista.Name = "btn_adicionarnalista";
-            btn_adicionarnalista.Size = new Size(118, 29);
-            btn_adicionarnalista.TabIndex = 93;
-            btn_adicionarnalista.Text = "ADICIONAR";
-            btn_adicionarnalista.UseVisualStyleBackColor = true;
-            btn_adicionarnalista.Click += btn_adicionarnalista_Click;
             // 
             // tela_cadastroaluno
             // 
