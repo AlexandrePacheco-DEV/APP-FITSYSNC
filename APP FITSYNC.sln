@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APP FITSYNC", "APP FITSYNC.csproj", "{AB422DD8-9A88-4EF2-BE60-6F4309B099FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB422DD8-9A88-4EF2-BE60-6F4309B099FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB422DD8-9A88-4EF2-BE60-6F4309B099FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB422DD8-9A88-4EF2-BE60-6F4309B099FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB422DD8-9A88-4EF2-BE60-6F4309B099FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF8C53B6-EBF8-4C5B-8B97-C880F9FDF6CF}
+	EndGlobalSection
+EndGlobal
