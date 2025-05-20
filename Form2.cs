@@ -99,15 +99,13 @@ namespace APP_FITSYNC
                 Telefone = txtTelefone.Text,
                 Status = cmbStatus.SelectedItem?.ToString() ?? ""
                 // Preencha outros campos aqui, se existirem
-                // Email = txtEmail.Text,
-                // Endereco = txtEndereco.Text,
-                // Observacoes = txtObservacoes.Text
             };
 
-            tela_buscaaluno.ListaAlunos.Add(aluno);
+            // Adiciona o aluno à lista compartilhada
+            ListaAlunos.Add(aluno);
 
+            // Abre o Form4 (tela_buscaaluno) e atualiza a lista
             tela_buscaaluno formBusca = new tela_buscaaluno();
-            formBusca.AtualizarListaAlunos();
             formBusca.Show();
             this.Hide();
         }
@@ -193,8 +191,29 @@ namespace APP_FITSYNC
 
         private void btn_cadastrar_Click_1(object sender, EventArgs e)
         {
+            var aluno = new Aluno
+            {
+                Nome = txtNome.Text,
+                Telefone = txtTelefone.Text,
+                Status = cmbStatus.SelectedItem?.ToString() ?? ""
+                // Preencha outros campos aqui, se existirem
+            };
 
+            // Create an instance of tela_buscaaluno to access dgvLista
+            tela_buscaaluno formBusca = new tela_buscaaluno();
+
+            // Add the aluno to the DataGridView
+            var dgv = formBusca.Controls.Find("dgvLista", true).FirstOrDefault() as DataGridView;
+            if (dgv != null)
+            {
+                dgv.Rows.Add(aluno.Nome, aluno.Telefone, aluno.Status);
+            }
+
+            formBusca.AtualizarListaAlunos();
+            formBusca.Show();
+            this.Hide();
         }
+        // Add this method to the `tela_buscaaluno` class
         public void AtualizarListaAlunos()
         {
             // Procura o controle DataGridView chamado "dgvLista" no formulário atual
@@ -203,7 +222,7 @@ namespace APP_FITSYNC
                 return; // Não encontrou o controle, evita erro
 
             dgv.Rows.Clear();
-            foreach (var aluno in ListaAlunos)
+            foreach (var aluno in tela_cadastroaluno.ListaAlunos)
             {
                 dgv.Rows.Add(aluno.Nome, aluno.Telefone, aluno.Status);
                 // Adicione outros campos se necessário

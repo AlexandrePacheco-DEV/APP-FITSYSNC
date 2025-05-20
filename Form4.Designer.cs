@@ -32,6 +32,10 @@
             btn_desativarAluno = new Button();
             dgvLista = new DataGridView();
             txtBuscar = new TextBox();
+            btAdicionar = new Button();
+            Nome = new DataGridViewTextBoxColumn();
+            CPF = new DataGridViewTextBoxColumn();
+            Telefone = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvLista).BeginInit();
             SuspendLayout();
             // 
@@ -59,9 +63,10 @@
             // dgvLista
             // 
             dgvLista.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLista.Columns.AddRange(new DataGridViewColumn[] { Nome, CPF, Telefone });
             dgvLista.Location = new Point(143, 70);
             dgvLista.Name = "dgvLista";
-            dgvLista.Size = new Size(240, 150);
+            dgvLista.Size = new Size(360, 150);
             dgvLista.TabIndex = 3;
             dgvLista.CellContentClick += dgvLista_CellContentClick;
             // 
@@ -71,6 +76,32 @@
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(100, 23);
             txtBuscar.TabIndex = 4;
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
+            // 
+            // btAdicionar
+            // 
+            btAdicionar.Location = new Point(324, 264);
+            btAdicionar.Name = "btAdicionar";
+            btAdicionar.Size = new Size(75, 23);
+            btAdicionar.TabIndex = 5;
+            btAdicionar.Text = "Adicionar";
+            btAdicionar.UseVisualStyleBackColor = true;
+            btAdicionar.Click += btAdicionar_Click;
+            // 
+            // Nome
+            // 
+            Nome.HeaderText = "Nome";
+            Nome.Name = "Nome";
+            // 
+            // CPF
+            // 
+            CPF.HeaderText = "CPF";
+            CPF.Name = "CPF";
+            // 
+            // Telefone
+            // 
+            Telefone.HeaderText = "Telefone";
+            Telefone.Name = "Telefone";
             // 
             // tela_buscaaluno
             // 
@@ -78,6 +109,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 0, 0);
             ClientSize = new Size(648, 392);
+            Controls.Add(btAdicionar);
             Controls.Add(txtBuscar);
             Controls.Add(dgvLista);
             Controls.Add(btn_desativarAluno);
@@ -95,7 +127,11 @@
 
         private Button btn_voltarBusca;
         private Button btn_desativarAluno;
-        private DataGridView dgvLista;
+        public DataGridView dgvLista;
         private TextBox txtBuscar;
+        private Button btAdicionar;
+        private DataGridViewTextBoxColumn Nome;
+        private DataGridViewTextBoxColumn CPF;
+        private DataGridViewTextBoxColumn Telefone;
     }
 }

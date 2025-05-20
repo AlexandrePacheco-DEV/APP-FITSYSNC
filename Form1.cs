@@ -21,7 +21,7 @@ namespace APP_FITSYNC
 
             if (usuario == usuario_correta && senha == senha_correta)
             {
-                tela_cadastroaluno interfaceForm = new tela_cadastroaluno();
+                tela_buscaaluno interfaceForm = new tela_buscaaluno();
                 interfaceForm.Show();
                 this.Hide();
                

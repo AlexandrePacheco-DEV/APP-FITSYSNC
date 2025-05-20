@@ -49,8 +49,6 @@
             label2 = new Label();
             txtEmail = new TextBox();
             label1 = new Label();
-            label12 = new Label();
-            maskedTextBox2 = new MaskedTextBox();
             label11 = new Label();
             mtbRegistro = new MaskedTextBox();
             label10 = new Label();
@@ -128,8 +126,6 @@
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(txtEmail);
             tabPage1.Controls.Add(label1);
-            tabPage1.Controls.Add(label12);
-            tabPage1.Controls.Add(maskedTextBox2);
             tabPage1.Controls.Add(label11);
             tabPage1.Controls.Add(mtbRegistro);
             tabPage1.Controls.Add(label10);
@@ -317,29 +313,11 @@
             label1.Text = "CEP";
             label1.Click += label1_Click;
             // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.ForeColor = SystemColors.ButtonHighlight;
-            label12.Location = new Point(614, 103);
-            label12.Name = "label12";
-            label12.Size = new Size(62, 15);
-            label12.TabIndex = 68;
-            label12.Text = "TELEFONE";
-            // 
-            // maskedTextBox2
-            // 
-            maskedTextBox2.Location = new Point(613, 118);
-            maskedTextBox2.Mask = "(99) 00000-0000";
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(121, 23);
-            maskedTextBox2.TabIndex = 67;
-            // 
             // label11
             // 
             label11.AutoSize = true;
             label11.ForeColor = SystemColors.ButtonHighlight;
-            label11.Location = new Point(758, 100);
+            label11.Location = new Point(612, 100);
             label11.Name = "label11";
             label11.Size = new Size(109, 15);
             label11.TabIndex = 66;
@@ -347,7 +325,7 @@
             // 
             // mtbRegistro
             // 
-            mtbRegistro.Location = new Point(759, 118);
+            mtbRegistro.Location = new Point(613, 118);
             mtbRegistro.Mask = "00/00/0000";
             mtbRegistro.Name = "mtbRegistro";
             mtbRegistro.Size = new Size(71, 23);
@@ -736,8 +714,6 @@
         private Label label2;
         private TextBox txtEmail;
         private Label label1;
-        private Label label12;
-        private MaskedTextBox maskedTextBox2;
         private Label label11;
         private MaskedTextBox mtbRegistro;
         private Label label10;
