@@ -29,72 +29,64 @@
         private void InitializeComponent()
         {
             btn_voltarBusca = new Button();
-            btn_editarTreinoAluno = new Button();
-            btn_excluirAluno = new Button();
-            listBox1 = new ListBox();
-            label1 = new Label();
+            btn_desativarAluno = new Button();
+            dgvLista = new DataGridView();
+            txtBuscar = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)dgvLista).BeginInit();
             SuspendLayout();
             // 
             // btn_voltarBusca
             // 
-            btn_voltarBusca.Location = new Point(151, 317);
+            btn_voltarBusca.Location = new Point(220, 264);
+            btn_voltarBusca.Margin = new Padding(3, 2, 3, 2);
             btn_voltarBusca.Name = "btn_voltarBusca";
-            btn_voltarBusca.Size = new Size(94, 29);
+            btn_voltarBusca.Size = new Size(82, 22);
             btn_voltarBusca.TabIndex = 0;
             btn_voltarBusca.Text = "VOLTAR";
             btn_voltarBusca.UseVisualStyleBackColor = true;
             btn_voltarBusca.Click += btn_voltarBusca_Click;
             // 
-            // btn_editarTreinoAluno
+            // btn_desativarAluno
             // 
-            btn_editarTreinoAluno.Location = new Point(528, 317);
-            btn_editarTreinoAluno.Name = "btn_editarTreinoAluno";
-            btn_editarTreinoAluno.Size = new Size(94, 29);
-            btn_editarTreinoAluno.TabIndex = 1;
-            btn_editarTreinoAluno.Text = "EDITAR";
-            btn_editarTreinoAluno.UseVisualStyleBackColor = true;
+            btn_desativarAluno.Location = new Point(132, 264);
+            btn_desativarAluno.Margin = new Padding(3, 2, 3, 2);
+            btn_desativarAluno.Name = "btn_desativarAluno";
+            btn_desativarAluno.Size = new Size(82, 22);
+            btn_desativarAluno.TabIndex = 2;
+            btn_desativarAluno.Text = "DESATIVAR";
+            btn_desativarAluno.UseVisualStyleBackColor = true;
             // 
-            // btn_excluirAluno
+            // dgvLista
             // 
-            btn_excluirAluno.Location = new Point(419, 317);
-            btn_excluirAluno.Name = "btn_excluirAluno";
-            btn_excluirAluno.Size = new Size(94, 29);
-            btn_excluirAluno.TabIndex = 2;
-            btn_excluirAluno.Text = "EXCLUIR";
-            btn_excluirAluno.UseVisualStyleBackColor = true;
+            dgvLista.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLista.Location = new Point(143, 70);
+            dgvLista.Name = "dgvLista";
+            dgvLista.Size = new Size(240, 150);
+            dgvLista.TabIndex = 3;
+            dgvLista.CellContentClick += dgvLista_CellContentClick;
             // 
-            // listBox1
+            // txtBuscar
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(160, 117);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(462, 44);
-            listBox1.TabIndex = 3;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(160, 94);
-            label1.Name = "label1";
-            label1.Size = new Size(85, 20);
-            label1.TabIndex = 4;
-            label1.Text = "PESQUISAR";
+            txtBuscar.Location = new Point(145, 47);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(100, 23);
+            txtBuscar.TabIndex = 4;
             // 
             // tela_buscaaluno
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 0, 0);
-            ClientSize = new Size(740, 523);
-            Controls.Add(label1);
-            Controls.Add(listBox1);
-            Controls.Add(btn_excluirAluno);
-            Controls.Add(btn_editarTreinoAluno);
+            ClientSize = new Size(648, 392);
+            Controls.Add(txtBuscar);
+            Controls.Add(dgvLista);
+            Controls.Add(btn_desativarAluno);
             Controls.Add(btn_voltarBusca);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "tela_buscaaluno";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BUSCA ALUNO";
+            ((System.ComponentModel.ISupportInitialize)dgvLista).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -102,9 +94,8 @@
         #endregion
 
         private Button btn_voltarBusca;
-        private Button btn_editarTreinoAluno;
-        private Button btn_excluirAluno;
-        private ListBox listBox1;
-        private Label label1;
+        private Button btn_desativarAluno;
+        private DataGridView dgvLista;
+        private TextBox txtBuscar;
     }
 }

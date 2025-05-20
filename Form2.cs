@@ -15,9 +15,12 @@ namespace APP_FITSYNC
 {
     public partial class tela_cadastroaluno : Form
     {
+        public static List<Aluno> ListaAlunos = new List<Aluno>();
         public tela_cadastroaluno()
         {
             InitializeComponent();
+          
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -90,35 +93,30 @@ namespace APP_FITSYNC
 
         private void btn_cadastrar_Click(object sender, EventArgs e)
         {
-            // codgido para verificar se as informações estão completas e se não estão (NÃO ALTERAR)
-            var camposInvalidos = new List<string>();
-
-            // Verificação do campo obrigatório
-            if (string.IsNullOrWhiteSpace(lbl_aluno.Text))
-                camposInvalidos.Add("Verifique se todas as informações necessárias estão preenchidas.");
-
-            // Se houver erros, exibe alerta e encerra
-            if (camposInvalidos.Any())
+            var aluno = new Aluno
             {
-                string mensagem = "ALERTA:\n- " + string.Join("\n- ", camposInvalidos);
-                MessageBox.Show(mensagem, "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                Nome = txtNome.Text,
+                Telefone = txtTelefone.Text,
+                Status = cmbStatus.SelectedItem?.ToString() ?? ""
+                // Preencha outros campos aqui, se existirem
+                // Email = txtEmail.Text,
+                // Endereco = txtEndereco.Text,
+                // Observacoes = txtObservacoes.Text
+            };
 
-            // Se passou na validação, exibe mensagem de sucesso
-            MessageBox.Show("Cadastro realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            tela_buscaaluno.ListaAlunos.Add(aluno);
 
-            // Aqui você pode seguir com a lógica de cadastro (abrir tela, salvar no banco, etc.)
-            tela_cadastroaluno interfaceForm = new tela_cadastroaluno();
-            interfaceForm.Show();
+            tela_buscaaluno formBusca = new tela_buscaaluno();
+            formBusca.AtualizarListaAlunos();
+            formBusca.Show();
             this.Hide();
         }
 
         private void enviar_whatsapp_Click(object sender, EventArgs e)
         {
             //BOTÃO DO WHATSAPP (TERMINO DE CODAR QUANDO O BOTÃO DE CADASTRAR O TREINO NO DATAVIEW ESTIVER PRONTO
-            string nomeCliente = lbl_aluno.Text.Trim();
-            string numeroComMascara = tele_aluno.Text;
+            string nomeCliente = txtNome.Text.Trim();
+            string numeroComMascara = txtTelefone.Text;
 
             // Remove tudo que não for número do telefone
             string numero = Regex.Replace(numeroComMascara, "[^0-9]", "");
@@ -142,7 +140,7 @@ namespace APP_FITSYNC
 
             string ultimoDia = "";
 
-            foreach (DataGridViewRow row in dtv_visualizartreino.Rows)
+            foreach (DataGridViewRow row in dgv_tabela.Rows)
             {
                 if (row.IsNewRow) continue;
 
@@ -180,8 +178,107 @@ namespace APP_FITSYNC
 
         private void btn_adicionarnalista_Click(object sender, EventArgs e)
         {
+            // Adiciona uma nova linha na dgv_tabela com os valores dos TextBox
+            dgv_tabela.Rows.Add(
+                cmbDias.SelectedItem?.ToString() ?? "",
+                txtExercicio.Text,
+                txtSeries.Text,
+                txtRepet.Text
+                );
+            // Limpa os campos após adicionar (opcional)
+            txtExercicio.Clear();
+            txtSeries.Clear();
+            txtRepet.Clear();
+        }
+
+        private void btn_cadastrar_Click_1(object sender, EventArgs e)
+        {
 
         }
+        public void AtualizarListaAlunos()
+        {
+            // Procura o controle DataGridView chamado "dgvLista" no formulário atual
+            var dgv = this.Controls.Find("dgvLista", true).FirstOrDefault() as DataGridView;
+            if (dgv == null)
+                return; // Não encontrou o controle, evita erro
+
+            dgv.Rows.Clear();
+            foreach (var aluno in ListaAlunos)
+            {
+                dgv.Rows.Add(aluno.Nome, aluno.Telefone, aluno.Status);
+                // Adicione outros campos se necessário
+            }
+        }
+        public tela_cadastroaluno(Aluno aluno)
+        {
+            InitializeComponent();
+
+            // Preenche os campos com os dados do aluno
+            txtNome.Text = aluno.Nome;
+            txtTelefone.Text = aluno.Telefone;
+            cmbStatus.SelectedItem = aluno.Status;
+            txtCPF.Text = aluno.CPF;
+            txtRG.Text = aluno.RG;
+            txtEndereco.Text = aluno.Endereco;
+            txtBairro.Text = aluno.Bairro;
+            txtCidade.Text = aluno.Cidade;
+            txtCEP.Text = aluno.CEP;
+            txtPeso.Text = aluno.Peso;
+            txtGenero.Text = aluno.Genero;
+            mtbContato.Text = aluno.Contato;
+            mtbNascimento.Text = aluno.Nascimento;
+            mtbRegistro.Text = aluno.Registro;
+            txtEmail.Text = aluno.Email;
+            // Adicione outros campos conforme necessário, por exemplo:
+
+
+            // Torna os campos não editáveis
+            txtNome.ReadOnly = true;
+            txtTelefone.ReadOnly = true;
+            cmbStatus.Enabled = false;
+            txtCPF.ReadOnly = true;
+            txtRG.ReadOnly = true;
+            txtEndereco.ReadOnly = true;
+            mtbNascimento.ReadOnly = true;
+            mtbRegistro.ReadOnly = true;
+            txtPeso.ReadOnly = true;
+            txtGenero.ReadOnly = true;
+            txtCEP.ReadOnly = true;
+            txtBairro.ReadOnly = true;
+            txtCidade.ReadOnly = true;
+            txtEndereco.ReadOnly = true;
+            mtbContato.ReadOnly = true;
+            txtEmail.ReadOnly = true;
+            // Se houver outros campos, preencha e desabilite também
+            // txtEmail.Text = aluno.Email;
+            // txtEmail.ReadOnly = true;
+        }
+    }
+    public class Aluno
+    {
+        public string Nome { get; set; }
+        public string Telefone { get; set; }
+        public string Status { get; set; }
+
+        public string CPF { get; set; }
+        public string RG { get; set; }
+        public string Endereco { get; set; }
+        public string Bairro { get; set; }
+        public string Cidade { get; set; }
+        public string CEP { get; set; }
+        public string Peso { get; set; }
+        public string Genero { get; set; }
+        public string Contato { get; set; }
+        public DateTime DataRegistro { get; set; }
+        public DateTime ProximaAtualizacao { get; set; }
+        public string Nascimento { get; set; }
+        public string Registro { get; set; }
+        public string Email { get; set; }
+
+        // Adicione outros campos conforme necessário, por exemplo:
+        // public string Email { get; set; }
+        // public string Endereco { get; set; }
+        // public string Observacoes { get; set; }
     }
 }
 

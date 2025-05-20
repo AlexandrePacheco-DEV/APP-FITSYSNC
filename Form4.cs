@@ -23,5 +23,14 @@ namespace APP_FITSYNC
             interfaceForm.Show();
             this.Hide();
         }
+
+        private void dgvLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        public void AdicionarAlunoNaLista(string nome, string telefone, string status)
+        {
+            dgvLista.Rows.Add(nome, telefone, status);
+        }
     }
 }
