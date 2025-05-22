@@ -113,6 +113,7 @@ namespace APP_FITSYNC
         private void enviar_whatsapp_Click(object sender, EventArgs e)
         {
             //BOTÃO DO WHATSAPP (TERMINO DE CODAR QUANDO O BOTÃO DE CADASTRAR O TREINO NO DATAVIEW ESTIVER PRONTO
+            
             string nomeCliente = txtNome.Text.Trim();
             string numeroComMascara = txtTelefone.Text;
 
@@ -132,9 +133,9 @@ namespace APP_FITSYNC
                 return;
             }
 
-            // Começa a montar a mensagem
+            // Monta a mensagem
             StringBuilder mensagem = new StringBuilder();
-            mensagem.AppendLine($"🏋️‍♂️ *Olá {nomeCliente}! Seu plano de treino semanal está pronto!* 💪\n");
+            mensagem.AppendLine($"🏋️‍♂️ *Olá {nomeCliente}! Seu plano de treino semanal está pronto, confira!* 💪");
 
             string ultimoDia = "";
 
@@ -142,10 +143,11 @@ namespace APP_FITSYNC
             {
                 if (row.IsNewRow) continue;
 
-                string dia = row.Cells["coluna_dias"]?.Value?.ToString()?.Trim() ?? "";
-                string aparelho = row.Cells["colunaAparelho"]?.Value?.ToString()?.Trim() ?? "";
-                string serie = row.Cells["colunaSerie"]?.Value?.ToString()?.Trim() ?? "";
-                string repeticao = row.Cells["colunaRep"]?.Value?.ToString()?.Trim() ?? "";
+                // Usa índice das colunas
+                string dia = row.Cells[0]?.Value?.ToString()?.Trim() ?? "";
+                string aparelho = row.Cells[1]?.Value?.ToString()?.Trim() ?? "";
+                string serie = row.Cells[2]?.Value?.ToString()?.Trim() ?? "";
+                string repeticao = row.Cells[3]?.Value?.ToString()?.Trim() ?? "";
 
                 // Adiciona o cabeçalho do dia quando muda
                 if (!string.IsNullOrWhiteSpace(dia) && dia != ultimoDia)
@@ -158,7 +160,7 @@ namespace APP_FITSYNC
                 mensagem.AppendLine($"• {aparelho} — {serie}x{repeticao}");
             }
 
-            mensagem.AppendLine("\n🤝 Qualquer dúvida, me chama aqui mesmo!");
+            mensagem.AppendLine("\n🤝 Em caso de dúvidas, consulte os professores disponíveis!.");
 
             // Codifica a mensagem para URL
             string mensagemFinal = Uri.EscapeDataString(mensagem.ToString());
@@ -167,12 +169,14 @@ namespace APP_FITSYNC
             string url = $"https://wa.me/55{numero}?text={mensagemFinal}";
 
             // Abre no navegador padrão
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            Process.Start(new ProcessStartInfo
             {
                 FileName = url,
                 UseShellExecute = true
             });
         }
+
+        
 
         private void btn_adicionarnalista_Click(object sender, EventArgs e)
         {

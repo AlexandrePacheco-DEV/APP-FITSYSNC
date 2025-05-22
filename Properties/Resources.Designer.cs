@@ -63,6 +63,16 @@ namespace APP_FITSYNC.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap busca_de_aluno_FITSYSNC {
+            get {
+                object obj = ResourceManager.GetObject("busca de aluno.FITSYSNC", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LOGO_ESCRITA_FITSYSNC {
             get {
                 object obj = ResourceManager.GetObject("LOGO ESCRITA FITSYSNC", resourceCulture);

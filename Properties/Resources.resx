@@ -130,4 +130,7 @@
   <data name="TEXTO REGISTRO TREINO FITSYNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TEXTO REGISTRO TREINO FITSYNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="busca de aluno.FITSYSNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\busca de aluno.FITSYSNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

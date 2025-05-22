@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(tela_buscaaluno));
             btn_voltarBusca = new Button();
             btn_desativarAluno = new Button();
             dgvLista = new DataGridView();
-            txtBuscar = new TextBox();
-            btAdicionar = new Button();
             Nome = new DataGridViewTextBoxColumn();
             CPF = new DataGridViewTextBoxColumn();
             Telefone = new DataGridViewTextBoxColumn();
+            txtBuscar = new TextBox();
+            btAdicionar = new Button();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvLista).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btn_voltarBusca
             // 
-            btn_voltarBusca.Location = new Point(220, 264);
-            btn_voltarBusca.Margin = new Padding(3, 2, 3, 2);
+            btn_voltarBusca.Location = new Point(199, 421);
             btn_voltarBusca.Name = "btn_voltarBusca";
-            btn_voltarBusca.Size = new Size(82, 22);
+            btn_voltarBusca.Size = new Size(96, 29);
             btn_voltarBusca.TabIndex = 0;
             btn_voltarBusca.Text = "VOLTAR";
             btn_voltarBusca.UseVisualStyleBackColor = true;
@@ -52,73 +54,96 @@
             // 
             // btn_desativarAluno
             // 
-            btn_desativarAluno.Location = new Point(132, 264);
-            btn_desativarAluno.Margin = new Padding(3, 2, 3, 2);
+            btn_desativarAluno.BackColor = Color.Red;
+            btn_desativarAluno.Location = new Point(428, 421);
             btn_desativarAluno.Name = "btn_desativarAluno";
-            btn_desativarAluno.Size = new Size(82, 22);
+            btn_desativarAluno.Size = new Size(94, 29);
             btn_desativarAluno.TabIndex = 2;
             btn_desativarAluno.Text = "DESATIVAR";
-            btn_desativarAluno.UseVisualStyleBackColor = true;
+            btn_desativarAluno.UseVisualStyleBackColor = false;
             // 
             // dgvLista
             // 
             dgvLista.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLista.Columns.AddRange(new DataGridViewColumn[] { Nome, CPF, Telefone });
-            dgvLista.Location = new Point(143, 70);
+            dgvLista.Location = new Point(199, 167);
+            dgvLista.Margin = new Padding(3, 4, 3, 4);
             dgvLista.Name = "dgvLista";
-            dgvLista.Size = new Size(360, 150);
+            dgvLista.RowHeadersWidth = 51;
+            dgvLista.Size = new Size(429, 200);
             dgvLista.TabIndex = 3;
             dgvLista.CellContentClick += dgvLista_CellContentClick;
             // 
+            // Nome
+            // 
+            Nome.HeaderText = "Nome";
+            Nome.MinimumWidth = 6;
+            Nome.Name = "Nome";
+            Nome.Width = 125;
+            // 
+            // CPF
+            // 
+            CPF.HeaderText = "CPF";
+            CPF.MinimumWidth = 6;
+            CPF.Name = "CPF";
+            CPF.Width = 125;
+            // 
+            // Telefone
+            // 
+            Telefone.HeaderText = "Telefone";
+            Telefone.MinimumWidth = 6;
+            Telefone.Name = "Telefone";
+            Telefone.Width = 125;
+            // 
             // txtBuscar
             // 
-            txtBuscar.Location = new Point(145, 47);
+            txtBuscar.Location = new Point(199, 132);
+            txtBuscar.Margin = new Padding(3, 4, 3, 4);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(100, 23);
+            txtBuscar.Size = new Size(429, 27);
             txtBuscar.TabIndex = 4;
             txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // btAdicionar
             // 
-            btAdicionar.Location = new Point(324, 264);
+            btAdicionar.BackColor = Color.FromArgb(0, 192, 0);
+            btAdicionar.Location = new Point(528, 421);
+            btAdicionar.Margin = new Padding(3, 4, 3, 4);
             btAdicionar.Name = "btAdicionar";
-            btAdicionar.Size = new Size(75, 23);
+            btAdicionar.Size = new Size(100, 31);
             btAdicionar.TabIndex = 5;
-            btAdicionar.Text = "Adicionar";
-            btAdicionar.UseVisualStyleBackColor = true;
+            btAdicionar.Text = "ADICIONAR";
+            btAdicionar.UseVisualStyleBackColor = false;
             btAdicionar.Click += btAdicionar_Click;
             // 
-            // Nome
+            // pictureBox1
             // 
-            Nome.HeaderText = "Nome";
-            Nome.Name = "Nome";
-            // 
-            // CPF
-            // 
-            CPF.HeaderText = "CPF";
-            CPF.Name = "CPF";
-            // 
-            // Telefone
-            // 
-            Telefone.HeaderText = "Telefone";
-            Telefone.Name = "Telefone";
+            pictureBox1.Image = Properties.Resources.busca_de_aluno_FITSYSNC;
+            pictureBox1.Location = new Point(128, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(500, 113);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
             // 
             // tela_buscaaluno
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 0, 0);
-            ClientSize = new Size(648, 392);
+            ClientSize = new Size(837, 523);
+            Controls.Add(pictureBox1);
             Controls.Add(btAdicionar);
             Controls.Add(txtBuscar);
             Controls.Add(dgvLista);
             Controls.Add(btn_desativarAluno);
             Controls.Add(btn_voltarBusca);
-            Margin = new Padding(3, 2, 3, 2);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "tela_buscaaluno";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BUSCA ALUNO";
             ((System.ComponentModel.ISupportInitialize)dgvLista).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -133,5 +158,6 @@
         private DataGridViewTextBoxColumn Nome;
         private DataGridViewTextBoxColumn CPF;
         private DataGridViewTextBoxColumn Telefone;
+        private PictureBox pictureBox1;
     }
 }
