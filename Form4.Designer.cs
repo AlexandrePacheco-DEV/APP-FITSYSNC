@@ -38,13 +38,14 @@
             txtBuscar = new TextBox();
             btAdicionar = new Button();
             pictureBox1 = new PictureBox();
+            btn_buscaAluno = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLista).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btn_voltarBusca
             // 
-            btn_voltarBusca.Location = new Point(199, 421);
+            btn_voltarBusca.Location = new Point(24, 482);
             btn_voltarBusca.Name = "btn_voltarBusca";
             btn_voltarBusca.Size = new Size(96, 29);
             btn_voltarBusca.TabIndex = 0;
@@ -55,11 +56,11 @@
             // btn_desativarAluno
             // 
             btn_desativarAluno.BackColor = Color.Red;
-            btn_desativarAluno.Location = new Point(428, 421);
+            btn_desativarAluno.Location = new Point(199, 423);
             btn_desativarAluno.Name = "btn_desativarAluno";
             btn_desativarAluno.Size = new Size(94, 29);
             btn_desativarAluno.TabIndex = 2;
-            btn_desativarAluno.Text = "DESATIVAR";
+            btn_desativarAluno.Text = "EXCLUIR";
             btn_desativarAluno.UseVisualStyleBackColor = false;
             // 
             // dgvLista
@@ -107,24 +108,36 @@
             // btAdicionar
             // 
             btAdicionar.BackColor = Color.FromArgb(0, 192, 0);
-            btAdicionar.Location = new Point(528, 421);
+            btAdicionar.Location = new Point(416, 421);
             btAdicionar.Margin = new Padding(3, 4, 3, 4);
             btAdicionar.Name = "btAdicionar";
             btAdicionar.Size = new Size(100, 31);
             btAdicionar.TabIndex = 5;
-            btAdicionar.Text = "ADICIONAR";
+            btAdicionar.Text = "NOVO ";
             btAdicionar.UseVisualStyleBackColor = false;
             btAdicionar.Click += btAdicionar_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.busca_de_aluno_FITSYSNC;
-            pictureBox1.Location = new Point(128, 12);
+            pictureBox1.Location = new Point(149, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(500, 113);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
+            // 
+            // btn_buscaAluno
+            // 
+            btn_buscaAluno.BackColor = Color.White;
+            btn_buscaAluno.Location = new Point(528, 421);
+            btn_buscaAluno.Margin = new Padding(3, 4, 3, 4);
+            btn_buscaAluno.Name = "btn_buscaAluno";
+            btn_buscaAluno.Size = new Size(100, 31);
+            btn_buscaAluno.TabIndex = 7;
+            btn_buscaAluno.Text = "BUSCAR";
+            btn_buscaAluno.UseVisualStyleBackColor = false;
+            btn_buscaAluno.Click += btn_buscaAluno_Click;
             // 
             // tela_buscaaluno
             // 
@@ -132,6 +145,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 0, 0);
             ClientSize = new Size(837, 523);
+            Controls.Add(btn_buscaAluno);
             Controls.Add(pictureBox1);
             Controls.Add(btAdicionar);
             Controls.Add(txtBuscar);
@@ -159,5 +173,6 @@
         private DataGridViewTextBoxColumn CPF;
         private DataGridViewTextBoxColumn Telefone;
         private PictureBox pictureBox1;
+        private Button btn_buscaAluno;
     }
 }

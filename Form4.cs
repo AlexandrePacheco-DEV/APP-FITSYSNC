@@ -23,7 +23,7 @@ namespace APP_FITSYNC
 
         private void btn_voltarBusca_Click(object sender, EventArgs e)
         {
-            tela_cadastroaluno interfaceForm = new tela_cadastroaluno();
+            tela_login interfaceForm = new tela_login();
             interfaceForm.Show();
             this.Hide();
         }
@@ -66,5 +66,42 @@ namespace APP_FITSYNC
             Form tela_cadastroaluno = new tela_cadastroaluno();
             tela_cadastroaluno.Show();
         }
+
+        private void btn_buscaAluno_Click(object sender, EventArgs e)
+        {
+            string termoBusca = txtBuscar.Text.Trim().ToLower();
+            string caminhoCsv = "dadosFitsync.csv";
+
+            if (!File.Exists(caminhoCsv))
+            {
+                MessageBox.Show("Aluno não encontrado.");
+                return;
+            }
+
+            DataTable tabela = new DataTable();
+            tabela.Columns.Add("Nome");
+            tabela.Columns.Add("Telefone");
+            tabela.Columns.Add("CPF");
+            tabela.Columns.Add("Status");
+
+            var linhas = File.ReadAllLines(caminhoCsv)
+                             .Skip(1)
+                             .Select(l => l.Split(','))
+                             .Where(d => d.Length >= 4)
+                             .GroupBy(d => d[2]) // Agrupar por CPF (evitar repetir treinos)
+                             .Select(g => g.First());
+
+            foreach (var dados in linhas)
+            {
+                string nome = dados[0].ToLower();
+                if (nome.Contains(termoBusca))
+                {
+                    tabela.Rows.Add(dados[0], dados[1], dados[2], dados[3]);
+                }
+            }
+
+            dgvLista.DataSource = tabela;
+        }
+
     }
 }
