@@ -137,8 +137,18 @@ namespace APP_FITSYNC
                 CPF = txtCPF.Text.Trim(),
                 RG = txtRG.Text.Trim(),
                 Status = cmbStatus.SelectedItem?.ToString() ?? "",
+                Endereco = txtEndereco.Text.Trim(),
+                Bairro = txtBairro.Text.Trim(),
+                Cidade = txtCidade.Text.Trim(),
+                CEP = txtCEP.Text.Trim(),
                 Peso = txtPeso.Text.Trim(),
                 Genero = txtGenero.Text.Trim(),
+                Nascimento = mtbNascimento.Text.Trim(),
+                Registro = mtbRegistro.Text.Trim(),
+                Contato = mtbContato.Text.Trim(),
+                Email = txtEmail.Text.Trim()
+
+
 
             };
 
