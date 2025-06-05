@@ -15,22 +15,30 @@ namespace APP_FITSYNC
 {
     public partial class tela_cadastroaluno : Form
     {
-        private string caminhoCsv = "C:/dadosFitsync.csv";
-        private int indiceEdicao = -1;
+        private string caminhoCsv = "C:\\Users\\Alexandre Pacheco\\Documents\\dadosFitsysnc";
+        
 
         public static List<Aluno> ListaAlunos = new List<Aluno>();
         public tela_cadastroaluno()
         {
             InitializeComponent();
+            // Define caminho seguro no "Meus Documentos"
+            caminhoCsv = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "dadosFitsync");
+            
 
+            // Garante que a pasta existe
+            if (!Directory.Exists(caminhoCsv))
+            {
+                Directory.CreateDirectory(caminhoCsv);
 
+            }
+            
         }
-
         private void Form2_Load(object sender, EventArgs e)
         {
 
         }
-
+        
 
         // whatsApp para ajudar usuário
         private void eNTREEMCONTATOToolStripMenuItem_Click(object sender, EventArgs e)
@@ -62,21 +70,7 @@ namespace APP_FITSYNC
 
         private void btn_cadastrar_Click(object sender, EventArgs e)
         {
-            var aluno = new Aluno
-            {
-                Nome = txtNome.Text,
-                Telefone = txtTelefone.Text,
-                Status = cmbStatus.SelectedItem?.ToString() ?? ""
-
-            };
-
-            // Adiciona o aluno à lista compartilhada
-            ListaAlunos.Add(aluno);
-
             
-            tela_buscaaluno formBusca = new tela_buscaaluno();
-            formBusca.Show();
-            this.Hide();
         }
 
         private void btn_adicionarnalista_Click(object sender, EventArgs e)
@@ -104,9 +98,7 @@ namespace APP_FITSYNC
         { "RG", txtRG },
         { "Status", cmbStatus },
         { "Peso", txtPeso },
-        { "Gênero", txtGenero },
-       
-     
+        { "Gênero", txtGenero }
     };
 
             // Validação dos campos obrigatórios
@@ -147,19 +139,25 @@ namespace APP_FITSYNC
                 Registro = mtbRegistro.Text.Trim(),
                 Contato = mtbContato.Text.Trim(),
                 Email = txtEmail.Text.Trim()
-
-
-
             };
 
             // Adiciona à lista em memória
             ListaAlunos.Add(aluno);
 
-            // Caminho do arquivo CSV
-            string caminhoCsv = "C:/dadosFitsync.csv";
-            bool arquivoExiste = File.Exists(caminhoCsv);
+            // Pasta onde os arquivos serão salvos
+            string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
 
-            // Conteúdo da linha a ser gravada
+            // Garante que a pasta existe
+            Directory.CreateDirectory(pastaCsv);
+
+            // Caminho do arquivo com nome do aluno
+            string nomeArquivo = $"Aluno_{aluno.Nome.Replace(" ", "_")}.csv";
+            string caminhoCsv = Path.Combine(pastaCsv, nomeArquivo);
+
+            // Cabeçalho do CSV
+            string cabecalho = "Nome,Telefone,CPF,Status,RG,Endereco,Bairro,Cidade,CEP,Peso,Genero,Nascimento,Registro,Contato,Email";
+
+            // Conteúdo da linha
             string linha = string.Join(",", new string[]
             {
         aluno.Nome,
@@ -181,15 +179,16 @@ namespace APP_FITSYNC
 
             try
             {
-                if (!arquivoExiste)
+                if (!File.Exists(caminhoCsv))
                 {
                     // Cria o arquivo com cabeçalho
-                    string cabecalho = "Nome,Telefone,CPF,Status,RG,Endereco,Bairro,Cidade,CEP,Peso,Genero,Nascimento,Registro,Contato,Email";
                     File.WriteAllText(caminhoCsv, cabecalho + Environment.NewLine);
                 }
 
                 // Adiciona o aluno no arquivo
                 File.AppendAllText(caminhoCsv, linha + Environment.NewLine);
+
+                MessageBox.Show("Aluno cadastrado e salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -213,7 +212,7 @@ namespace APP_FITSYNC
             dgv.Rows.Clear();
             foreach (var aluno in tela_cadastroaluno.ListaAlunos)
             {
-                dgv.Rows.Add(aluno.Nome, aluno.Telefone, aluno.Status);
+                dgv.Rows.Add(aluno.Nome, aluno.CPF, aluno.Status);
 
             }
         }

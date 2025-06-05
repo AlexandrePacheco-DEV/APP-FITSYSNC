@@ -62,6 +62,7 @@
             btn_desativarAluno.TabIndex = 2;
             btn_desativarAluno.Text = "EXCLUIR";
             btn_desativarAluno.UseVisualStyleBackColor = false;
+            btn_desativarAluno.Click += btn_desativarAluno_Click;
             // 
             // dgvLista
             // 
