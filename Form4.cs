@@ -107,7 +107,8 @@ namespace APP_FITSYNC
             dgvLista.Rows.Clear();
             foreach (var aluno in tela_cadastroaluno.ListaAlunos)
             {
-                dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone);
+                dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone, aluno.Status);
+
             }
         }
 
@@ -122,10 +123,11 @@ namespace APP_FITSYNC
                     aluno.CPF.ToLower().Contains(filtro) ||
                     (aluno.Telefone ?? "").ToLower().Contains(filtro))
                 {
-                    dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone);
+                    dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone, aluno.Status);
+
                 }
             }
-            
+
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)
@@ -134,41 +136,6 @@ namespace APP_FITSYNC
             tela_cadastroaluno.Show();
         }
 
-        private void btn_buscaAluno_Click(object sender, EventArgs e)
-        {
-            string termoBusca = txtBuscar.Text.Trim().ToLower();
-            string caminhoCsv = ObterCaminhoCsv();
-
-            if (!File.Exists(caminhoCsv))
-            {
-                MessageBox.Show("Aluno não encontrado.");
-                return;
-            }
-
-            DataTable tabela = new DataTable();
-            tabela.Columns.Add("Nome");
-            tabela.Columns.Add("Telefone");
-            tabela.Columns.Add("CPF");
-            tabela.Columns.Add("Status");
-
-            var linhas = File.ReadAllLines(caminhoCsv)
-                             .Skip(1)
-                             .Select(l => l.Split(','))
-                             .Where(d => d.Length >= 4)
-                             .GroupBy(d => d[2]) // Agrupa por CPF
-                             .Select(g => g.First());
-
-            foreach (var dados in linhas)
-            {
-                string nome = dados[0].ToLower();
-                if (nome.Contains(termoBusca))
-                {
-                    tabela.Rows.Add(dados[0], dados[1], dados[2], dados[3]);
-                }
-            }
-
-            dgvLista.DataSource = tabela;
-        }
 
         private void btn_desativarAluno_Click(object sender, EventArgs e)
 
@@ -180,8 +147,8 @@ namespace APP_FITSYNC
             }
 
             // Supondo que o Nome está na coluna 0 e CPF na coluna 2 (ajuste conforme necessário)
-            string nomeSelecionado = dgvLista.SelectedRows[0].Cells[0].Value.ToString();
-            string cpfSelecionado = dgvLista.SelectedRows[0].Cells[2].Value.ToString();
+            string nomeSelecionado = dgvLista.SelectedRows[0].Cells[0].Value.ToString(); // Nome
+            string cpfSelecionado = dgvLista.SelectedRows[0].Cells[1].Value.ToString();  // CPF;
 
             // Confirmação
             DialogResult result = MessageBox.Show($"Tem certeza que deseja desativar o aluno {nomeSelecionado}?",
@@ -208,20 +175,24 @@ namespace APP_FITSYNC
             {
                 // Monta o caminho do arquivo do aluno
                 string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
-                string nomeArquivo = $"Aluno_{nomeSelecionado.Replace(" ", "_")}.csv";
+
+                // ATENÇÃO: nao altere o caminho
+                string nomeArquivo = $"Aluno_{nomeSelecionado}---{cpfSelecionado}.csv";
                 string caminhoArquivo = Path.Combine(pastaCsv, nomeArquivo);
 
                 // Verifica se o arquivo existe e apaga
                 if (File.Exists(caminhoArquivo))
                 {
                     File.Delete(caminhoArquivo);
+                    MessageBox.Show("Aluno desativado e arquivo removido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Arquivo do aluno não encontrado. Pode já ter sido removido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                   
+
                 }
 
-                MessageBox.Show("Aluno desativado e arquivo removido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
 
                 // Atualiza DataGridView
                 AtualizarListaAlunos();
@@ -230,6 +201,12 @@ namespace APP_FITSYNC
             {
                 MessageBox.Show($"Erro ao excluir o arquivo do aluno: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void tela_buscaaluno_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

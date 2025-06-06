@@ -13,6 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace APP_FITSYNC
 {
+
     public partial class tela_cadastroaluno : Form
     {
         private string caminhoCsv = "C:\\Users\\Alexandre Pacheco\\Documents\\dadosFitsysnc";
@@ -32,6 +33,7 @@ namespace APP_FITSYNC
                 Directory.CreateDirectory(caminhoCsv);
 
             }
+
             
         }
         private void Form2_Load(object sender, EventArgs e)
@@ -151,42 +153,54 @@ namespace APP_FITSYNC
             Directory.CreateDirectory(pastaCsv);
 
             // Caminho do arquivo com nome do aluno
-            string nomeArquivo = $"Aluno_{aluno.Nome.Replace(" ", "_")}.csv";
+            string nomeArquivo = $"Aluno_{aluno.Nome}---{aluno.CPF}.csv";
             string caminhoCsv = Path.Combine(pastaCsv, nomeArquivo);
-
-            // Cabeçalho do CSV
-            string cabecalho = "Nome,Telefone,CPF,Status,RG,Endereco,Bairro,Cidade,CEP,Peso,Genero,Nascimento,Registro,Contato,Email";
-
-            // Conteúdo da linha
-            string linha = string.Join(",", new string[]
-            {
-        aluno.Nome,
-        aluno.Telefone,
-        aluno.CPF,
-        aluno.Status,
-        aluno.RG,
-        aluno.Endereco,
-        aluno.Bairro,
-        aluno.Cidade,
-        aluno.CEP,
-        aluno.Peso,
-        aluno.Genero,
-        aluno.Nascimento,
-        aluno.Registro,
-        aluno.Contato,
-        aluno.Email
-            });
 
             try
             {
-                if (!File.Exists(caminhoCsv))
+                // Começa a montar as linhas do CSV em uma lista
+                List<string> linhasCsv = new List<string>();
+
+                // Cabeçalho dos dados do aluno
+                linhasCsv.Add("Nome,Telefone,CPF,Status,RG,Endereco,Bairro,Cidade,CEP,Peso,Genero,Nascimento,Registro,Contato,Email");
+
+                // Linha com os dados do aluno
+                linhasCsv.Add(string.Join(",", new string[]
                 {
-                    // Cria o arquivo com cabeçalho
-                    File.WriteAllText(caminhoCsv, cabecalho + Environment.NewLine);
+            aluno.Nome,
+            aluno.Telefone,
+            aluno.CPF,
+            aluno.Status,
+            aluno.RG,
+            aluno.Endereco,
+            aluno.Bairro,
+            aluno.Cidade,
+            aluno.CEP,
+            aluno.Peso,
+            aluno.Genero,
+            aluno.Nascimento,
+            aluno.Registro,
+            aluno.Contato,
+            aluno.Email
+                }));
+
+                // Linha em branco para separar dados do aluno da lista de treino
+                linhasCsv.Add("");
+
+                // Agora, salva a lista de treinos no formato "Dia - Exercício"
+                foreach (DataGridViewRow row in dgv_tabela.Rows)
+                {
+                    if (row.IsNewRow) continue; // Ignora a linha vazia final
+
+                    string diaTreino = row.Cells[0].Value?.ToString() ?? "";
+                    string treino = row.Cells[1].Value?.ToString() ?? "";
+
+                    // Formato desejado: Segunda - Rosca Direta
+                    linhasCsv.Add($"{diaTreino} - {treino}");
                 }
 
-                // Adiciona o aluno no arquivo
-                File.AppendAllText(caminhoCsv, linha + Environment.NewLine);
+                // Escreve tudo no arquivo (sobrescreve se já existir)
+                File.WriteAllLines(caminhoCsv, linhasCsv);
 
                 MessageBox.Show("Aluno cadastrado e salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -356,6 +370,7 @@ namespace APP_FITSYNC
 
      
     }
+
 }
 
     

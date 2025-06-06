@@ -38,7 +38,7 @@
             txtBuscar = new TextBox();
             btAdicionar = new Button();
             pictureBox1 = new PictureBox();
-            btn_buscaAluno = new Button();
+            btn_editaraluno = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLista).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -128,17 +128,16 @@
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
             // 
-            // btn_buscaAluno
+            // btn_editaraluno
             // 
-            btn_buscaAluno.BackColor = Color.White;
-            btn_buscaAluno.Location = new Point(528, 421);
-            btn_buscaAluno.Margin = new Padding(3, 4, 3, 4);
-            btn_buscaAluno.Name = "btn_buscaAluno";
-            btn_buscaAluno.Size = new Size(100, 31);
-            btn_buscaAluno.TabIndex = 7;
-            btn_buscaAluno.Text = "BUSCAR";
-            btn_buscaAluno.UseVisualStyleBackColor = false;
-            btn_buscaAluno.Click += btn_buscaAluno_Click;
+            btn_editaraluno.BackColor = Color.FromArgb(255, 255, 128);
+            btn_editaraluno.Location = new Point(528, 421);
+            btn_editaraluno.Margin = new Padding(3, 4, 3, 4);
+            btn_editaraluno.Name = "btn_editaraluno";
+            btn_editaraluno.Size = new Size(100, 31);
+            btn_editaraluno.TabIndex = 7;
+            btn_editaraluno.Text = "EDITAR";
+            btn_editaraluno.UseVisualStyleBackColor = false;
             // 
             // tela_buscaaluno
             // 
@@ -146,7 +145,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 0, 0);
             ClientSize = new Size(837, 523);
-            Controls.Add(btn_buscaAluno);
+            Controls.Add(btn_editaraluno);
             Controls.Add(pictureBox1);
             Controls.Add(btAdicionar);
             Controls.Add(txtBuscar);
@@ -157,6 +156,7 @@
             Name = "tela_buscaaluno";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BUSCA ALUNO";
+            Load += tela_buscaaluno_Load;
             ((System.ComponentModel.ISupportInitialize)dgvLista).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
@@ -174,6 +174,6 @@
         private DataGridViewTextBoxColumn CPF;
         private DataGridViewTextBoxColumn Telefone;
         private PictureBox pictureBox1;
-        private Button btn_buscaAluno;
+        private Button btn_editaraluno;
     }
 }
