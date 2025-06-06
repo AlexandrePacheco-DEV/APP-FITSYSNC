@@ -138,6 +138,7 @@
             btn_editaraluno.TabIndex = 7;
             btn_editaraluno.Text = "EDITAR";
             btn_editaraluno.UseVisualStyleBackColor = false;
+            btn_editaraluno.Click += btn_editaraluno_Click;
             // 
             // tela_buscaaluno
             // 

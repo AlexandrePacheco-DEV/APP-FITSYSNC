@@ -13,6 +13,7 @@ namespace APP_FITSYNC
 {
     public partial class tela_buscaaluno : Form
     {
+        private List<string[]> listaTreino;
 
 
         // Removed duplicate declaration of dgvLista
@@ -188,11 +189,11 @@ namespace APP_FITSYNC
                 }
                 else
                 {
-                   
+
 
                 }
 
-               
+
 
                 // Atualiza DataGridView
                 AtualizarListaAlunos();
@@ -208,6 +209,114 @@ namespace APP_FITSYNC
         {
 
         }
+
+        private void btn_editaraluno_Click(object sender, EventArgs e)
+        {
+            if (dgvLista.SelectedRows.Count == 0)
+    {
+        MessageBox.Show("Por favor, selecione um aluno para editar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+    }
+            // Pasta onde os arquivos serão salvos
+            string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
+
+            // Garante que a pasta existe
+            Directory.CreateDirectory(pastaCsv);
+            // Pega nome e CPF selecionados
+            string nomeSelecionado = dgvLista.SelectedRows[0].Cells[0].Value.ToString();
+            string cpfSelecionado = dgvLista.SelectedRows[0].Cells[2].Value.ToString();
+
+            // Monta o caminho do arquivo
+            string nomeArquivo = $"Aluno_{nomeSelecionado}---{cpfSelecionado}.csv";
+            string caminhoArquivo = Path.Combine(pastaCsv, nomeArquivo);
+
+            if (!File.Exists(caminhoArquivo))
+    {
+        MessageBox.Show("Arquivo do aluno não encontrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+    }
+
+    try
+    {
+        string[] linhas = File.ReadAllLines(caminhoArquivo);
+
+        if (linhas.Length < 2)
+        {
+            MessageBox.Show("Arquivo de aluno inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        // Carrega dados do aluno
+        string[] camposAluno = linhas[1].Split(',');
+
+        var aluno = new Aluno
+        {
+            Nome = camposAluno[0],
+            Telefone = camposAluno[1],
+            CPF = camposAluno[2],
+            Status = camposAluno[3],
+            RG = camposAluno[4],
+            Endereco = camposAluno[5],
+            Bairro = camposAluno[6],
+            Cidade = camposAluno[7],
+            CEP = camposAluno[8],
+            Peso = camposAluno[9],
+            Genero = camposAluno[10],
+            Nascimento = camposAluno[11],
+            Registro = camposAluno[12],
+            Contato = camposAluno[13],
+            Email = camposAluno.Length > 14 ? camposAluno[14] : ""
+        };
+
+                // Abre tela de cadastro com dados preenchidos
+                tela_cadastroaluno formCadastro = new tela_cadastroaluno(aluno, listaTreino);
+                formCadastro.ShowDialog();
+
+                // Limpa a dgv_tabela da tela de cadastro
+                DataGridView dgvTabela = formCadastro.Controls.Find("dgv_tabela", true).FirstOrDefault() as DataGridView;
+        if (dgvTabela != null)
+        {
+            dgvTabela.Rows.Clear();
+
+            bool lendoTreino = false;
+
+            for (int i = 2; i < linhas.Length; i++)
+            {
+                string linha = linhas[i].Trim();
+
+                // Detecta cabeçalho do treino
+                if (linha.StartsWith("Dia,Exercicio"))
+                {
+                    lendoTreino = true;
+                    continue;
+                }
+
+                if (lendoTreino && !string.IsNullOrWhiteSpace(linha))
+                {
+                    string[] partes = linha.Split(',');
+
+                    if (partes.Length >= 4)
+                    {
+                        string dia = partes[0];
+                        string exercicio = partes[1];
+                        string serie = partes[2];
+                        string repeticao = partes[3];
+
+                        dgvTabela.Rows.Add(dia, exercicio, serie, repeticao);
+                    }
+                }
+            }
+        }
+
+        // Mostra a tela de edição
+        formCadastro.Show();
+        this.Hide();
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Erro ao editar aluno: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+}
     }
 }
         

@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.LinkLabel;
 
 namespace APP_FITSYNC
 {
@@ -20,6 +21,8 @@ namespace APP_FITSYNC
         
 
         public static List<Aluno> ListaAlunos = new List<Aluno>();
+        private Aluno aluno;
+
         public tela_cadastroaluno()
         {
             InitializeComponent();
@@ -185,18 +188,19 @@ namespace APP_FITSYNC
                 }));
 
                 // Linha em branco para separar dados do aluno da lista de treino
-                linhasCsv.Add("");
+                linhasCsv.Add("Dia,Exercicio,Series,Repeticoes");
 
-                // Agora, salva a lista de treinos no formato "Dia - Exercício"
+                // Agora, salva cada linha da grid corretamente como tabela
                 foreach (DataGridViewRow row in dgv_tabela.Rows)
                 {
                     if (row.IsNewRow) continue; // Ignora a linha vazia final
 
                     string diaTreino = row.Cells[0].Value?.ToString() ?? "";
-                    string treino = row.Cells[1].Value?.ToString() ?? "";
+                    string exercicio = row.Cells[1].Value?.ToString() ?? "";
+                    string series = row.Cells[2].Value?.ToString() ?? "";
+                    string repeticoes = row.Cells[3].Value?.ToString() ?? "";
 
-                    // Formato desejado: Segunda - Rosca Direta
-                    linhasCsv.Add($"{diaTreino} - {treino}");
+                    linhasCsv.Add($"{diaTreino},{exercicio},{series},{repeticoes}");
                 }
 
                 // Escreve tudo no arquivo (sobrescreve se já existir)
@@ -230,7 +234,7 @@ namespace APP_FITSYNC
 
             }
         }
-        public tela_cadastroaluno(Aluno aluno)
+        public tela_cadastroaluno(Aluno aluno, List<string[]> listaTreino)
         {
             InitializeComponent();
 
@@ -270,7 +274,30 @@ namespace APP_FITSYNC
             txtEndereco.ReadOnly = true;
             mtbContato.ReadOnly = true;
             txtEmail.ReadOnly = true;
+            DataTable dtTreino = new DataTable();
 
+            InitializeComponent();
+
+            this.aluno = aluno;
+
+            if (listaTreino == null)
+                listaTreino = new List<string[]>();
+
+           
+
+            // carrega a lista treino no grid
+            dgv_tabela.Rows.Clear();
+            foreach (var linha in listaTreino)
+            {
+                dgv_tabela.Rows.Add(linha);
+            }
+
+
+        }
+
+        public tela_cadastroaluno(Aluno aluno)
+        {
+            this.aluno = aluno;
         }
 
         private void voltarpara_busca_Click(object sender, EventArgs e)
