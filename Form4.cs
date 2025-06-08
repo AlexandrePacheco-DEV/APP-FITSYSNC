@@ -15,9 +15,6 @@ namespace APP_FITSYNC
     {
         private List<string[]> listaTreino;
 
-
-        // Removed duplicate declaration of dgvLista
-
         public tela_buscaaluno()
         {
             InitializeComponent();
@@ -45,7 +42,7 @@ namespace APP_FITSYNC
                 {
                     string[] linhas = File.ReadAllLines(arquivo);
 
-                    // Pula o cabeçalho e lê as linhas de dados
+                    // cabeçalho 
                     for (int i = 1; i < linhas.Length; i++)
                     {
                         string[] campos = linhas[i].Split(',');
@@ -71,12 +68,12 @@ namespace APP_FITSYNC
                                 Email = campos.Length > 14 ? campos[14] : ""
                             };
 
-                            // Adiciona à lista em memória
+                           
                             tela_cadastroaluno.ListaAlunos.Add(aluno);
 
                             // Adiciona ao DataGridView
                             dgvLista.Rows.Add(aluno.Nome, aluno.Telefone, aluno.CPF, aluno.Status);
-                            // ➡️ Ajuste para adicionar outras colunas conforme tiver no seu DataGridView
+                            
                         }
                     }
                 }
@@ -102,7 +99,6 @@ namespace APP_FITSYNC
         {
 
         }
-        // Add this method to the `tela_buscaaluno` class
         public void AtualizarListaAlunos()
         {
             dgvLista.Rows.Clear();
@@ -147,9 +143,9 @@ namespace APP_FITSYNC
                 return;
             }
 
-            // Supondo que o Nome está na coluna 0 e CPF na coluna 2 (ajuste conforme necessário)
+        
             string nomeSelecionado = dgvLista.SelectedRows[0].Cells[0].Value.ToString(); // Nome
-            string cpfSelecionado = dgvLista.SelectedRows[0].Cells[1].Value.ToString();  // CPF;
+            string cpfSelecionado = dgvLista.SelectedRows[0].Cells[1].Value.ToString();  // CPF
 
             // Confirmação
             DialogResult result = MessageBox.Show($"Tem certeza que deseja desativar o aluno {nomeSelecionado}?",
@@ -159,7 +155,7 @@ namespace APP_FITSYNC
 
             if (result != DialogResult.Yes)
             {
-                return;  // Cancelado
+                return; 
             }
 
             // Remove do DataGridView
@@ -174,7 +170,7 @@ namespace APP_FITSYNC
 
             try
             {
-                // Monta o caminho do arquivo do aluno
+                // arquivo do aluno salvo no caminho, mudar na maquina da academia
                 string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
 
                 // ATENÇÃO: nao altere o caminho
@@ -219,14 +215,12 @@ namespace APP_FITSYNC
     }
             // Pasta onde os arquivos serão salvos
             string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
-
-            // Garante que a pasta existe
             Directory.CreateDirectory(pastaCsv);
             // Pega nome e CPF selecionados
             string nomeSelecionado = dgvLista.SelectedRows[0].Cells[0].Value.ToString();
             string cpfSelecionado = dgvLista.SelectedRows[0].Cells[2].Value.ToString();
 
-            // Monta o caminho do arquivo
+            // caminho do arquivo
             string nomeArquivo = $"Aluno_{nomeSelecionado}---{cpfSelecionado}.csv";
             string caminhoArquivo = Path.Combine(pastaCsv, nomeArquivo);
 
@@ -246,7 +240,7 @@ namespace APP_FITSYNC
             return;
         }
 
-        // Carrega dados do aluno
+        // dados do aluno
         string[] camposAluno = linhas[1].Split(',');
 
         var aluno = new Aluno
@@ -268,11 +262,9 @@ namespace APP_FITSYNC
             Email = camposAluno.Length > 14 ? camposAluno[14] : ""
         };
 
-                // Abre tela de cadastro com dados preenchidos
                 tela_cadastroaluno formCadastro = new tela_cadastroaluno(aluno, listaTreino);
                 formCadastro.ShowDialog();
 
-                // Limpa a dgv_tabela da tela de cadastro
                 DataGridView dgvTabela = formCadastro.Controls.Find("dgv_tabela", true).FirstOrDefault() as DataGridView;
         if (dgvTabela != null)
         {

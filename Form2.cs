@@ -100,10 +100,6 @@ namespace APP_FITSYNC
         { "Nome", txtNome },
         { "Telefone", txtTelefone },
         { "CPF", txtCPF },
-        { "RG", txtRG },
-        { "Status", cmbStatus },
-        { "Peso", txtPeso },
-        { "Gênero", txtGenero }
     };
 
             // Validação dos campos obrigatórios
@@ -258,21 +254,22 @@ namespace APP_FITSYNC
 
 
             // Torna os campos não editáveis
-            txtNome.ReadOnly = true;
-            txtTelefone.ReadOnly = true;
-            cmbStatus.Enabled = false;
-            txtCPF.ReadOnly = true;
-            txtRG.ReadOnly = true;
-            txtEndereco.ReadOnly = true;
-            mtbNascimento.ReadOnly = true;
-            mtbRegistro.ReadOnly = true;
-            txtPeso.ReadOnly = true;
-            txtGenero.ReadOnly = true;
-            txtCEP.ReadOnly = true;
-            txtBairro.ReadOnly = true;
-            txtCidade.ReadOnly = true;
-            txtEndereco.ReadOnly = true;
-            mtbContato.ReadOnly = true;
+            txtNome.ReadOnly = false;         
+            txtTelefone.ReadOnly = false;       
+            cmbStatus.Enabled = true;           
+            txtCPF.ReadOnly = true;             
+            txtRG.ReadOnly = true;              
+            txtEndereco.ReadOnly = false;       
+            mtbNascimento.ReadOnly = true;      
+            mtbRegistro.ReadOnly = true;        
+            txtPeso.ReadOnly = false;           
+            txtGenero.ReadOnly = false;         
+            txtCEP.ReadOnly = false;            
+            txtBairro.ReadOnly = false;         
+            txtCidade.ReadOnly = false;         
+            mtbContato.ReadOnly = false;        
+            txtEmail.ReadOnly = false;          
+
             txtEmail.ReadOnly = true;
             DataTable dtTreino = new DataTable();
 
@@ -302,7 +299,7 @@ namespace APP_FITSYNC
 
         private void voltarpara_busca_Click(object sender, EventArgs e)
         {
-            //botão para voltar para o 
+            //botão para voltar para a busca dos alunos
             tela_buscaaluno interLoginForm = new tela_buscaaluno();
             interLoginForm.Show();
             this.Hide();
