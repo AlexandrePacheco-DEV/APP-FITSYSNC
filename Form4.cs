@@ -72,7 +72,7 @@ namespace APP_FITSYNC
                             tela_cadastroaluno.ListaAlunos.Add(aluno);
 
                             // Adiciona ao DataGridView
-                            dgvLista.Rows.Add(aluno.Nome, aluno.Telefone, aluno.CPF, aluno.Status);
+                            dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone);
                             
                         }
                     }
@@ -104,7 +104,7 @@ namespace APP_FITSYNC
             dgvLista.Rows.Clear();
             foreach (var aluno in tela_cadastroaluno.ListaAlunos)
             {
-                dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone, aluno.Status);
+                dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone);
 
             }
         }
@@ -120,7 +120,7 @@ namespace APP_FITSYNC
                     aluno.CPF.ToLower().Contains(filtro) ||
                     (aluno.Telefone ?? "").ToLower().Contains(filtro))
                 {
-                    dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone, aluno.Status);
+                    dgvLista.Rows.Add(aluno.Nome, aluno.CPF, aluno.Telefone);
 
                 }
             }
