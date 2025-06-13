@@ -299,7 +299,7 @@ namespace APP_FITSYNC
 
         private void voltarpara_busca_Click(object sender, EventArgs e)
         {
-          
+            //botão para voltar para a busca dos alunos
             this.Hide();
         }
 

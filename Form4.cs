@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
+using static APP_FITSYNC.Class1;
 
 namespace APP_FITSYNC
 {
@@ -22,6 +23,7 @@ namespace APP_FITSYNC
             CarregarAlunosSalvos();
 
         }
+
         private void CarregarAlunosSalvos()
         {
             string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
@@ -143,11 +145,9 @@ namespace APP_FITSYNC
                 return;
             }
 
-        
             string nomeSelecionado = dgvLista.SelectedRows[0].Cells[0].Value.ToString(); // Nome
             string cpfSelecionado = dgvLista.SelectedRows[0].Cells[1].Value.ToString();  // CPF
 
-            // Confirmação
             DialogResult result = MessageBox.Show($"Tem certeza que deseja desativar o aluno {nomeSelecionado}?",
                                                   "Confirmação",
                                                   MessageBoxButtons.YesNo,
@@ -155,13 +155,11 @@ namespace APP_FITSYNC
 
             if (result != DialogResult.Yes)
             {
-                return; 
+                return;
             }
 
-            // Remove do DataGridView
             dgvLista.Rows.RemoveAt(dgvLista.SelectedRows[0].Index);
 
-            // Remove da ListaAlunos
             var alunoRemover = tela_cadastroaluno.ListaAlunos.FirstOrDefault(a => a.CPF == cpfSelecionado);
             if (alunoRemover != null)
             {
@@ -170,28 +168,16 @@ namespace APP_FITSYNC
 
             try
             {
-                // arquivo do aluno salvo no caminho, mudar na maquina da academia
                 string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
+                string nomeArquivo = $"Aluno_{nomeSelecionado}---{cpfSelecionado}.csv"; // Corrigido
+                string caminhoCsv = Path.Combine(pastaCsv, nomeArquivo);
 
-                // ATENÇÃO: nao altere o caminho
-                string nomeArquivo = $"Aluno_{nomeSelecionado}---{cpfSelecionado}.csv";
-                string caminhoArquivo = Path.Combine(pastaCsv, nomeArquivo);
-
-                // Verifica se o arquivo existe e apaga
-                if (File.Exists(caminhoArquivo))
+                if (File.Exists(caminhoCsv))
                 {
-                    File.Delete(caminhoArquivo);
+                    File.Delete(caminhoCsv);
                     MessageBox.Show("Aluno desativado e arquivo removido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
-                {
 
-
-                }
-
-
-
-                // Atualiza DataGridView
                 AtualizarListaAlunos();
             }
             catch (Exception ex)
@@ -218,7 +204,7 @@ namespace APP_FITSYNC
             Directory.CreateDirectory(pastaCsv);
             // Pega nome e CPF selecionados
             string nomeSelecionado = dgvLista.SelectedRows[0].Cells[0].Value.ToString();
-            string cpfSelecionado = dgvLista.SelectedRows[0].Cells[2].Value.ToString();
+            string cpfSelecionado = dgvLista.SelectedRows[0].Cells[1].Value.ToString();
 
             // caminho do arquivo
             string nomeArquivo = $"Aluno_{nomeSelecionado}---{cpfSelecionado}.csv";
