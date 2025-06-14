@@ -22,6 +22,7 @@ namespace APP_FITSYNC
             AtualizarListaAlunos();
             CarregarAlunosSalvos();
 
+
         }
 
         private void CarregarAlunosSalvos()

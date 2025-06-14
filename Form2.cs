@@ -18,8 +18,9 @@ namespace APP_FITSYNC
     public partial class tela_cadastroaluno : Form
     {
         private string caminhoCsv = "C:\\Users\\Alexandre Pacheco\\Documents\\dadosFitsysnc";
+        private tela_buscaaluno telaBusca;
 
-        
+
 
         public static List<Aluno> ListaAlunos = new List<Aluno>();
         private Aluno aluno;
@@ -361,15 +362,16 @@ namespace APP_FITSYNC
         public tela_cadastroaluno(Aluno aluno)
         {
             this.aluno = aluno;
+
         }
 
         private void voltarpara_busca_Click(object sender, EventArgs e)
         {
             tela_buscaaluno formBusca = new tela_buscaaluno();
             formBusca.Show();
-            this.Hide();
+            this.Close();
         }
-        
+
 
         private void btn_enviartreinoWhat_Click(object sender, EventArgs e)
         {
