@@ -88,6 +88,7 @@
             colunaSerie = new DataGridViewTextBoxColumn();
             colunaRep = new DataGridViewTextBoxColumn();
             imageList1 = new ImageList(components);
+            lblCep = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -111,6 +112,7 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(64, 0, 0);
+            tabPage1.Controls.Add(lblCep);
             tabPage1.Controls.Add(btn_enviartreinoWhat);
             tabPage1.Controls.Add(voltarpara_busca);
             tabPage1.Controls.Add(btn_cadastrar);
@@ -674,6 +676,16 @@
             imageList1.TransparentColor = Color.Transparent;
             imageList1.Images.SetKeyName(0, "TEXTO REGISTRO TREINO FITSYNC.png");
             // 
+            // lblCep
+            // 
+            lblCep.AutoSize = true;
+            lblCep.ForeColor = SystemColors.Control;
+            lblCep.Location = new Point(143, 352);
+            lblCep.Name = "lblCep";
+            lblCep.Size = new Size(34, 20);
+            lblCep.TabIndex = 96;
+            lblCep.Text = "CEP";
+            // 
             // tela_cadastroaluno
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -760,5 +772,6 @@
         private ToolStripMenuItem aJUDAToolStripMenuItem;
         private ToolStripMenuItem wHATSAPPToolStripMenuItem;
         private Button btn_enviartreinoWhat;
+        private Label lblCep;
     }
 }

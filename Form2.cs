@@ -18,6 +18,7 @@ namespace APP_FITSYNC
     public partial class tela_cadastroaluno : Form
     {
         private string caminhoCsv = "C:\\Users\\Alexandre Pacheco\\Documents\\dadosFitsysnc";
+
         
 
         public static List<Aluno> ListaAlunos = new List<Aluno>();
@@ -28,6 +29,7 @@ namespace APP_FITSYNC
             InitializeComponent();
             // Define caminho seguro no "Meus Documentos"
             caminhoCsv = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "dadosFitsync");
+
             
 
             // Garante que a pasta existe
@@ -36,12 +38,13 @@ namespace APP_FITSYNC
                 Directory.CreateDirectory(caminhoCsv);
 
             }
+           
+   
 
-            
+
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-
         }
         
 
@@ -92,6 +95,8 @@ namespace APP_FITSYNC
             txtSeries.Clear();
             txtRepet.Clear();
         }
+        private bool modoEdicao = false;
+
 
         private void btn_cadastrar_Click_1(object sender, EventArgs e)
         {
@@ -122,50 +127,125 @@ namespace APP_FITSYNC
                 }
             }
 
-            // Criação do objeto aluno
-            var aluno = new Aluno
+            // Atualiza dados do objeto aluno
+            if (modoEdicao && aluno != null)
             {
-                Nome = txtNome.Text.Trim(),
-                Telefone = txtTelefone.Text.Trim(),
-                CPF = txtCPF.Text.Trim(),
-                RG = txtRG.Text.Trim(),
-                Status = cmbStatus.SelectedItem?.ToString() ?? "",
-                Endereco = txtEndereco.Text.Trim(),
-                Bairro = txtBairro.Text.Trim(),
-                Cidade = txtCidade.Text.Trim(),
-                CEP = txtCEP.Text.Trim(),
-                Peso = txtPeso.Text.Trim(),
-                Genero = txtGenero.Text.Trim(),
-                Nascimento = mtbNascimento.Text.Trim(),
-                Registro = mtbRegistro.Text.Trim(),
-                Contato = mtbContato.Text.Trim(),
-                Email = txtEmail.Text.Trim()
-            };
+                
+                aluno.Telefone = txtTelefone.Text.Trim();
+                aluno.Status = cmbStatus.SelectedItem?.ToString() ?? "";
+                aluno.RG = txtRG.Text.Trim();
+                aluno.Endereco = txtEndereco.Text.Trim();
+                aluno.Bairro = txtBairro.Text.Trim();
+                aluno.Cidade = txtCidade.Text.Trim();
+                aluno.CEP = txtCEP.Text.Trim();
+                aluno.Peso = txtPeso.Text.Trim();
+                aluno.Genero = txtGenero.Text.Trim();
+                aluno.Nascimento = mtbNascimento.Text.Trim();
+                aluno.Registro = mtbRegistro.Text.Trim();
+                aluno.Contato = mtbContato.Text.Trim();
+                aluno.Email = txtEmail.Text.Trim();
 
-            // Adiciona à lista em memória
-            ListaAlunos.Add(aluno);
+                string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
+                string nomeArquivo = $"Aluno_{aluno.Nome}---{aluno.CPF}.csv";
+                string caminhoCsv = Path.Combine(pastaCsv, nomeArquivo);
 
-            // Pasta onde os arquivos serão salvos
-            string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
-
-            // Garante que a pasta existe
-            Directory.CreateDirectory(pastaCsv);
-
-            // Caminho do arquivo com nome do aluno
-            string nomeArquivo = $"Aluno_{aluno.Nome}---{aluno.CPF}.csv";
-            string caminhoCsv = Path.Combine(pastaCsv, nomeArquivo);
-
-            try
-            {
-                // Começa a montar as linhas do CSV em uma lista
-                List<string> linhasCsv = new List<string>();
-
-                // Cabeçalho dos dados do aluno
-                linhasCsv.Add("Nome,Telefone,CPF,Status,RG,Endereco,Bairro,Cidade,CEP,Peso,Genero,Nascimento,Registro,Contato,Email");
-
-                // Linha com os dados do aluno
-                linhasCsv.Add(string.Join(",", new string[]
+                try
                 {
+                    List<string> linhasCsv = new List<string>();
+
+                    // Cabeçalho
+                    linhasCsv.Add("Nome,Telefone,CPF,Status,RG,Endereco,Bairro,Cidade,CEP,Peso,Genero,Nascimento,Registro,Contato,Email");
+
+                    // Dados do aluno
+                    linhasCsv.Add(string.Join(",", new string[]
+                    {
+        aluno.Nome,
+        aluno.Telefone,
+        aluno.CPF,
+        aluno.Status,
+        aluno.RG,
+        aluno.Endereco,
+        aluno.Bairro,
+        aluno.Cidade,
+        aluno.CEP,
+        aluno.Peso,
+        aluno.Genero,
+        aluno.Nascimento,
+        aluno.Registro,
+        aluno.Contato,
+        aluno.Email
+                    }));
+
+                    // Linha em branco
+                    linhasCsv.Add("Dia,Exercicio,Series,Repeticoes");
+
+                    // Dados da grid
+                    foreach (DataGridViewRow row in dgv_tabela.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+
+                        string dia = row.Cells[0].Value?.ToString() ?? "";
+                        string exercicio = row.Cells[1].Value?.ToString() ?? "";
+                        string series = row.Cells[2].Value?.ToString() ?? "";
+                        string repeticoes = row.Cells[3].Value?.ToString() ?? "";
+
+                        linhasCsv.Add($"{dia},{exercicio},{series},{repeticoes}");
+                    }
+
+                    File.WriteAllLines(caminhoCsv, linhasCsv);
+
+                    MessageBox.Show("Alterações salvas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao salvar alterações:\n" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                aluno = new Aluno
+                {
+                    Nome = txtNome.Text.Trim(),
+                    Telefone = txtTelefone.Text.Trim(),
+                    CPF = txtCPF.Text.Trim(),
+                    Status = cmbStatus.SelectedItem?.ToString() ?? "",
+                    RG = txtRG.Text.Trim(),
+                    Endereco = txtEndereco.Text.Trim(),
+                    Bairro = txtBairro.Text.Trim(),
+                    Cidade = txtCidade.Text.Trim(),
+                    CEP = txtCEP.Text.Trim(),
+                    Peso = txtPeso.Text.Trim(),
+                    Genero = txtGenero.Text.Trim(),
+                    Nascimento = mtbNascimento.Text.Trim(),
+                    Registro = mtbRegistro.Text.Trim(),
+                    Contato = mtbContato.Text.Trim(),
+                    Email = txtEmail.Text.Trim()
+                };
+
+                // Adiciona à lista em memória
+                ListaAlunos.Add(aluno);
+
+                // Pasta onde os arquivos serão salvos
+                string pastaCsv = @"C:\Users\Alexandre Pacheco\Documents\dadosFitsync";
+
+                // Garante que a pasta existe
+                Directory.CreateDirectory(pastaCsv);
+
+                // Caminho do arquivo com nome do aluno
+                string nomeArquivo = $"Aluno_{aluno.Nome}---{aluno.CPF}.csv";
+                string caminhoCsv = Path.Combine(pastaCsv, nomeArquivo);
+
+                try
+                {
+                    // Começa a montar as linhas do CSV em uma lista
+                    List<string> linhasCsv = new List<string>();
+
+                    // Cabeçalho dos dados do aluno
+                    linhasCsv.Add("Nome,Telefone,CPF,Status,RG,Endereco,Bairro,Cidade,CEP,Peso,Genero,Nascimento,Registro,Contato,Email");
+
+                    // Linha com os dados do aluno
+                    linhasCsv.Add(string.Join(",", new string[]
+                    {
             aluno.Nome,
             aluno.Telefone,
             aluno.CPF,
@@ -181,39 +261,40 @@ namespace APP_FITSYNC
             aluno.Registro,
             aluno.Contato,
             aluno.Email
-                }));
+                    }));
 
-                // Linha em branco para separar dados do aluno da lista de treino
-                linhasCsv.Add("Dia,Exercicio,Series,Repeticoes");
+                    // Linha em branco para separar dados do aluno da lista de treino
+                    linhasCsv.Add("Dia,Exercicio,Series,Repeticoes");
 
-                // Agora, salva cada linha da grid corretamente como tabela
-                foreach (DataGridViewRow row in dgv_tabela.Rows)
+                    // Agora, salva cada linha da grid corretamente como tabela
+                    foreach (DataGridViewRow row in dgv_tabela.Rows)
+                    {
+                        if (row.IsNewRow) continue; // Ignora a linha vazia final
+
+                        string diaTreino = row.Cells[0].Value?.ToString() ?? "";
+                        string exercicio = row.Cells[1].Value?.ToString() ?? "";
+                        string series = row.Cells[2].Value?.ToString() ?? "";
+                        string repeticoes = row.Cells[3].Value?.ToString() ?? "";
+
+                        linhasCsv.Add($"{diaTreino},{exercicio},{series},{repeticoes}");
+                    }
+
+                    // Escreve tudo no arquivo (sobrescreve se já existir)
+                    File.WriteAllLines(caminhoCsv, linhasCsv);
+
+                    MessageBox.Show("Aluno cadastrado e salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
                 {
-                    if (row.IsNewRow) continue; // Ignora a linha vazia final
-
-                    string diaTreino = row.Cells[0].Value?.ToString() ?? "";
-                    string exercicio = row.Cells[1].Value?.ToString() ?? "";
-                    string series = row.Cells[2].Value?.ToString() ?? "";
-                    string repeticoes = row.Cells[3].Value?.ToString() ?? "";
-
-                    linhasCsv.Add($"{diaTreino},{exercicio},{series},{repeticoes}");
+                    MessageBox.Show($"Erro ao salvar no arquivo CSV:\n{ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
-                // Escreve tudo no arquivo (sobrescreve se já existir)
-                File.WriteAllLines(caminhoCsv, linhasCsv);
-
-                MessageBox.Show("Aluno cadastrado e salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Abre a tela de busca de alunos
+                tela_buscaaluno formBusca = new tela_buscaaluno();
+                formBusca.Show();
+                this.Hide();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao salvar no arquivo CSV:\n{ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Abre a tela de busca de alunos
-            tela_buscaaluno formBusca = new tela_buscaaluno();
-            formBusca.Show();
-            this.Hide();
         }
 
         public void AtualizarListaAlunos()
@@ -233,6 +314,12 @@ namespace APP_FITSYNC
         public tela_cadastroaluno(Aluno aluno, List<string[]> listaTreino)
         {
             InitializeComponent();
+            this.aluno = aluno;
+            modoEdicao = true;
+            txtNome.ReadOnly = true;
+            txtNome.BackColor = Color.LightGray;
+            txtCPF.ReadOnly = true;
+            txtCPF.BackColor = Color.LightGray;
 
             // Preenche os campos com os dados do aluno
             txtNome.Text = aluno.Nome;
@@ -251,45 +338,24 @@ namespace APP_FITSYNC
             mtbRegistro.Text = aluno.Registro;
             txtEmail.Text = aluno.Email;
 
+            // Torna Nome e CPF não editáveis
+            txtNome.ReadOnly = true;
+            txtCPF.ReadOnly = true;
 
+            // Troca o texto do botão
+            btn_cadastrar.Text = "SALVAR";
 
-            // Torna os campos não editáveis
-            txtNome.ReadOnly = false;         
-            txtTelefone.ReadOnly = false;       
-            cmbStatus.Enabled = true;           
-            txtCPF.ReadOnly = true;             
-            txtRG.ReadOnly = true;              
-            txtEndereco.ReadOnly = false;       
-            mtbNascimento.ReadOnly = true;      
-            mtbRegistro.ReadOnly = true;        
-            txtPeso.ReadOnly = false;           
-            txtGenero.ReadOnly = false;         
-            txtCEP.ReadOnly = false;            
-            txtBairro.ReadOnly = false;         
-            txtCidade.ReadOnly = false;         
-            mtbContato.ReadOnly = false;        
-            txtEmail.ReadOnly = false;          
-
-            txtEmail.ReadOnly = true;
-            DataTable dtTreino = new DataTable();
-
-            InitializeComponent();
-
-            this.aluno = aluno;
-
-            if (listaTreino == null)
-                listaTreino = new List<string[]>();
-
-           
-
-            // carrega a lista treino no grid
+            // Carrega a tabela de treino
             dgv_tabela.Rows.Clear();
-            foreach (var linha in listaTreino)
+            if (listaTreino != null)
             {
-                dgv_tabela.Rows.Add(linha);
+                foreach (var linha in listaTreino)
+                {
+                    dgv_tabela.Rows.Add(linha);
+                }
+
+
             }
-
-
         }
 
         public tela_cadastroaluno(Aluno aluno)
@@ -299,9 +365,11 @@ namespace APP_FITSYNC
 
         private void voltarpara_busca_Click(object sender, EventArgs e)
         {
-            //botão para voltar para a busca dos alunos
+            tela_buscaaluno formBusca = new tela_buscaaluno();
+            formBusca.Show();
             this.Hide();
         }
+        
 
         private void btn_enviartreinoWhat_Click(object sender, EventArgs e)
         {
