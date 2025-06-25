@@ -132,8 +132,9 @@ namespace APP_FITSYNC
 
         private void btAdicionar_Click(object sender, EventArgs e)
         {
-            Form tela_cadastroaluno = new tela_cadastroaluno();
-            tela_cadastroaluno.Show();
+            tela_cadastroaluno cadastro = new tela_cadastroaluno();
+            cadastro.Show();
+            this.Hide(); // Esconde a tela de busca (não fecha!)
         }
 
 
@@ -287,10 +288,10 @@ namespace APP_FITSYNC
             }
         }
 
-        // Mostra a tela de edição
-        formCadastro.Show();
-        this.Hide();
-    }
+                tela_cadastroaluno cadastro = new tela_cadastroaluno();
+                cadastro.Show();
+                this.Hide(); // Esconde a tela de busca (não fecha!)
+            }
     catch (Exception ex)
     {
         MessageBox.Show($"Erro ao editar aluno: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);

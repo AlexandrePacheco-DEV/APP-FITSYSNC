@@ -20,7 +20,11 @@ namespace APP_FITSYNC
         private string caminhoCsv = "C:\\Users\\Alexandre Pacheco\\Documents\\dadosFitsysnc";
         private tela_buscaaluno telaBusca;
 
-
+        public tela_cadastroaluno(tela_buscaaluno buscaAluno)
+        {
+            InitializeComponent();
+            telaBusca = buscaAluno; // guarda a instância original
+        }
 
         public static List<Aluno> ListaAlunos = new List<Aluno>();
         private Aluno aluno;
@@ -31,7 +35,7 @@ namespace APP_FITSYNC
             // Define caminho seguro no "Meus Documentos"
             caminhoCsv = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "dadosFitsync");
 
-            
+
 
             // Garante que a pasta existe
             if (!Directory.Exists(caminhoCsv))
@@ -39,15 +43,15 @@ namespace APP_FITSYNC
                 Directory.CreateDirectory(caminhoCsv);
 
             }
-           
-   
+
+
 
 
         }
         private void Form2_Load(object sender, EventArgs e)
         {
         }
-        
+
 
         // whatsApp para ajudar usuário
         private void eNTREEMCONTATOToolStripMenuItem_Click(object sender, EventArgs e)
@@ -79,7 +83,7 @@ namespace APP_FITSYNC
 
         private void btn_cadastrar_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btn_adicionarnalista_Click(object sender, EventArgs e)
@@ -131,7 +135,7 @@ namespace APP_FITSYNC
             // Atualiza dados do objeto aluno
             if (modoEdicao && aluno != null)
             {
-                
+
                 aluno.Telefone = txtTelefone.Text.Trim();
                 aluno.Status = cmbStatus.SelectedItem?.ToString() ?? "";
                 aluno.RG = txtRG.Text.Trim();
@@ -367,15 +371,26 @@ namespace APP_FITSYNC
 
         private void voltarpara_busca_Click(object sender, EventArgs e)
         {
-            tela_buscaaluno formBusca = new tela_buscaaluno();
-            formBusca.Show();
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is tela_buscaaluno)
+                {
+                    form.Show();   // Reexibe a tela original de busca
+                    this.Close();  // Fecha a tela de cadastro atual
+                    return;
+                }
+            }
+
+            
+            tela_buscaaluno novaBusca = new tela_buscaaluno();
+            novaBusca.Show();
             this.Close();
         }
 
 
         private void btn_enviartreinoWhat_Click(object sender, EventArgs e)
         {
-             //BOTÃO DO WHATSAPP 
+            //BOTÃO DO WHATSAPP 
 
             string nomeCliente = txtNome.Text.Trim();
             string numeroComMascara = txtTelefone.Text;
@@ -435,6 +450,21 @@ namespace APP_FITSYNC
             Process.Start(new ProcessStartInfo
             {
                 FileName = url,
+                UseShellExecute = true
+            });
+        }
+
+        private void aJUDAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void wHATSAPPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string link = "https://wa.me/5517997878173?text=Ol%C3%A1%20Alexandre%2C%20gostaria%20de%20ajuda%20com%20o%20app%20fitsysnc\r\n";
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = link,
                 UseShellExecute = true
             });
         }

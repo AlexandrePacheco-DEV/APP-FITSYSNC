@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(tela_cadastroaluno));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            lblCep = new Label();
             btn_enviartreinoWhat = new Button();
             voltarpara_busca = new Button();
             btn_cadastrar = new Button();
@@ -88,7 +89,6 @@
             colunaSerie = new DataGridViewTextBoxColumn();
             colunaRep = new DataGridViewTextBoxColumn();
             imageList1 = new ImageList(components);
-            lblCep = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -157,6 +157,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "ALUNO";
             // 
+            // lblCep
+            // 
+            lblCep.AutoSize = true;
+            lblCep.ForeColor = SystemColors.Control;
+            lblCep.Location = new Point(316, 351);
+            lblCep.Name = "lblCep";
+            lblCep.Size = new Size(34, 20);
+            lblCep.TabIndex = 96;
+            lblCep.Text = "CEP";
+            // 
             // btn_enviartreinoWhat
             // 
             btn_enviartreinoWhat.BackColor = Color.FromArgb(0, 192, 0);
@@ -203,7 +213,7 @@
             // 
             label17.AutoSize = true;
             label17.ForeColor = SystemColors.ButtonHighlight;
-            label17.Location = new Point(361, 431);
+            label17.Location = new Point(991, 201);
             label17.Name = "label17";
             label17.Size = new Size(142, 20);
             label17.TabIndex = 85;
@@ -211,7 +221,7 @@
             // 
             // mtbNascimento
             // 
-            mtbNascimento.Location = new Point(363, 455);
+            mtbNascimento.Location = new Point(1018, 225);
             mtbNascimento.Margin = new Padding(3, 4, 3, 4);
             mtbNascimento.Mask = "00/00/0000";
             mtbNascimento.Name = "mtbNascimento";
@@ -221,14 +231,14 @@
             // 
             // txtCEP
             // 
-            txtCEP.Location = new Point(143, 375);
+            txtCEP.Location = new Point(316, 374);
             txtCEP.Name = "txtCEP";
-            txtCEP.Size = new Size(140, 27);
+            txtCEP.Size = new Size(83, 27);
             txtCEP.TabIndex = 83;
             // 
             // mtbContato
             // 
-            mtbContato.Location = new Point(143, 455);
+            mtbContato.Location = new Point(143, 374);
             mtbContato.Mask = "(00) 99999-9999";
             mtbContato.Name = "mtbContato";
             mtbContato.Size = new Size(105, 27);
@@ -238,7 +248,7 @@
             // 
             label15.AutoSize = true;
             label15.ForeColor = SystemColors.Control;
-            label15.Location = new Point(139, 431);
+            label15.Location = new Point(113, 343);
             label15.Name = "label15";
             label15.Size = new Size(191, 20);
             label15.TabIndex = 80;
@@ -266,7 +276,7 @@
             // 
             label13.AutoSize = true;
             label13.ForeColor = SystemColors.Control;
-            label13.Location = new Point(486, 353);
+            label13.Location = new Point(538, 355);
             label13.Name = "label13";
             label13.Size = new Size(61, 20);
             label13.TabIndex = 76;
@@ -274,16 +284,16 @@
             // 
             // txtBairro
             // 
-            txtBairro.Location = new Point(486, 372);
+            txtBairro.Location = new Point(538, 374);
             txtBairro.Name = "txtBairro";
-            txtBairro.Size = new Size(140, 27);
+            txtBairro.Size = new Size(88, 27);
             txtBairro.TabIndex = 75;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(313, 353);
+            label3.Location = new Point(417, 355);
             label3.Name = "label3";
             label3.Size = new Size(93, 20);
             label3.TabIndex = 74;
@@ -291,9 +301,9 @@
             // 
             // txtCidade
             // 
-            txtCidade.Location = new Point(313, 372);
+            txtCidade.Location = new Point(417, 374);
             txtCidade.Name = "txtCidade";
-            txtCidade.Size = new Size(140, 27);
+            txtCidade.Size = new Size(100, 27);
             txtCidade.TabIndex = 73;
             // 
             // label2
@@ -317,7 +327,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(137, 375);
+            label1.Location = new Point(310, 374);
             label1.Name = "label1";
             label1.Size = new Size(34, 20);
             label1.TabIndex = 70;
@@ -336,11 +346,11 @@
             // 
             // mtbRegistro
             // 
-            mtbRegistro.Location = new Point(862, 224);
+            mtbRegistro.Location = new Point(861, 224);
             mtbRegistro.Margin = new Padding(3, 4, 3, 4);
             mtbRegistro.Mask = "00/00/0000";
             mtbRegistro.Name = "mtbRegistro";
-            mtbRegistro.Size = new Size(70, 27);
+            mtbRegistro.Size = new Size(71, 27);
             mtbRegistro.TabIndex = 65;
             mtbRegistro.ValidatingType = typeof(DateTime);
             // 
@@ -484,6 +494,7 @@
             aJUDAToolStripMenuItem.Name = "aJUDAToolStripMenuItem";
             aJUDAToolStripMenuItem.Size = new Size(159, 24);
             aJUDAToolStripMenuItem.Text = "FALE NOSSA EQUIPE";
+            aJUDAToolStripMenuItem.Click += aJUDAToolStripMenuItem_Click;
             // 
             // wHATSAPPToolStripMenuItem
             // 
@@ -491,6 +502,7 @@
             wHATSAPPToolStripMenuItem.Name = "wHATSAPPToolStripMenuItem";
             wHATSAPPToolStripMenuItem.Size = new Size(168, 26);
             wHATSAPPToolStripMenuItem.Text = "WHATSAPP";
+            wHATSAPPToolStripMenuItem.Click += wHATSAPPToolStripMenuItem_Click;
             // 
             // tabPage2
             // 
@@ -675,16 +687,6 @@
             imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
             imageList1.TransparentColor = Color.Transparent;
             imageList1.Images.SetKeyName(0, "TEXTO REGISTRO TREINO FITSYNC.png");
-            // 
-            // lblCep
-            // 
-            lblCep.AutoSize = true;
-            lblCep.ForeColor = SystemColors.Control;
-            lblCep.Location = new Point(143, 352);
-            lblCep.Name = "lblCep";
-            lblCep.Size = new Size(34, 20);
-            lblCep.TabIndex = 96;
-            lblCep.Text = "CEP";
             // 
             // tela_cadastroaluno
             // 

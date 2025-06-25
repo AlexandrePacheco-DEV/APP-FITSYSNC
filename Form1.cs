@@ -13,7 +13,7 @@ namespace APP_FITSYNC
         private void btn_acessar_Click(object sender, EventArgs e)
         {
             
-            string usuario_correta = "adm1";
+            string usuario_correta = "adm";
             string senha_correta = "123";
 
             string usuario = txt_login.Text;
