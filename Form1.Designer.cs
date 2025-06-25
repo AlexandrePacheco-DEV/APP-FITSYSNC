@@ -164,7 +164,9 @@
             Controls.Add(btn_sair);
             Controls.Add(btn_acessar);
             ForeColor = Color.FromArgb(64, 0, 0);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "tela_login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FITSYSNC";

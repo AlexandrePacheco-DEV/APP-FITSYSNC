@@ -164,21 +164,21 @@ namespace APP_FITSYNC
                     // Dados do aluno
                     linhasCsv.Add(string.Join(",", new string[]
                     {
-        aluno.Nome,
-        aluno.Telefone,
-        aluno.CPF,
-        aluno.Status,
-        aluno.RG,
-        aluno.Endereco,
-        aluno.Bairro,
-        aluno.Cidade,
-        aluno.CEP,
-        aluno.Peso,
-        aluno.Genero,
-        aluno.Nascimento,
-        aluno.Registro,
-        aluno.Contato,
-        aluno.Email
+                    aluno.Nome,
+                    aluno.Telefone,
+                    aluno.CPF,
+                    aluno.Status,
+                    aluno.RG,
+                    aluno.Endereco,
+                    aluno.Bairro,
+                    aluno.Cidade,
+                    aluno.CEP,
+                    aluno.Peso,
+                    aluno.Genero,
+                    aluno.Nascimento,
+                    aluno.Registro,
+                    aluno.Contato,
+                    aluno.Email
                     }));
 
                     // Linha em branco

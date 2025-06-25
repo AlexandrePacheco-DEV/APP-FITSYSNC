@@ -153,7 +153,9 @@
             Controls.Add(dgvLista);
             Controls.Add(btn_desativarAluno);
             Controls.Add(btn_voltarBusca);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "tela_buscaaluno";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BUSCA ALUNO";

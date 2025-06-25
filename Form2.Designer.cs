@@ -695,8 +695,10 @@
             BackColor = Color.FromArgb(64, 0, 0);
             ClientSize = new Size(1266, 612);
             Controls.Add(tabControl1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "tela_cadastroaluno";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CADASTRO ALUNO";
